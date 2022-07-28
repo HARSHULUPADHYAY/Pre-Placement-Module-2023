@@ -1,0 +1,18 @@
+class Solution:
+    def __init__(self):
+        self._rez: list[list[int]] = []
+
+    def permute(self, nums: list[int]) -> list[list[int]]:
+        self._dfs(now_list=[], remained=deque(nums))
+        return self._rez
+
+    def _dfs(self, now_list: list[int], remained: "deque") -> None:
+        if remained.__len__():
+            for _ in range(remained.__len__()):
+                now_list.append(remained.popleft())
+                self._dfs(now_list=now_list, remained=remained)
+                remained.append(now_list.pop())
+            return
+        
+        self._rez.append(now_list.copy())
+        
