@@ -1,0 +1,12 @@
+class Solution:
+    def recur(self,tri,dp,row,ind):
+        # print(row,ind)
+        if row>=len(tri):
+            return 0
+        if dp[row][ind]!=-100000:
+            return dp[row][ind]
+        dp[row][ind] = tri[row][ind]+min(self.recur(tri,dp,row+1,ind),self.recur(tri,dp,row+1,ind+1))
+        return dp[row][ind]
+    def minimumTotal(self, tri: List[List[int]]) -> int:
+        dp = [[-100000 for i in range(len(tri)+1)] for i in range(len(tri)+1)]
+        return self.recur(tri,dp,0,0)
