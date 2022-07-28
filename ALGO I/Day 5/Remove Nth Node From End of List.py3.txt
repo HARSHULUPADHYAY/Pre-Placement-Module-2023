@@ -1,0 +1,25 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        buffer = deque(maxlen=n + 1)
+        cur_node = head
+        
+        # Find the last n+1 nodes
+        while cur_node is not None:
+            buffer.append(cur_node)
+            cur_node = cur_node.next
+            
+        # The node preceding the node to delete
+        preceding_node = buffer[0]
+
+        if len(buffer) == 1:  # Remove the head of a singlet list leaving nothing
+            head = None
+        elif len(buffer) == n:  # Remove the head of a longer list
+            head = buffer[1]
+        else:
+            preceding_node.next = preceding_node.next.next
+        return head
