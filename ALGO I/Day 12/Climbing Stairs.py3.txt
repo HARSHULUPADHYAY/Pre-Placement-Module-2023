@@ -1,0 +1,19 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        stair_memo = {}
+        count = 0
+        
+        def climb(cur: int) -> int:
+            nonlocal count
+            if(cur == n):
+                count += 1
+                return 1
+            elif(cur > n):
+                return 0
+            if cur + 1 not in stair_memo:
+                stair_memo[cur + 1] = climb(cur+1)
+            if cur + 2 not in stair_memo:
+                stair_memo[cur + 2] = climb(cur+2)
+            return stair_memo[cur + 1] + stair_memo[cur + 2]
+        
+        return climb(0)
