@@ -1,0 +1,20 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        i = len(nums) // 2
+        j = len(nums)
+        l_prev = -1
+        r_prev = len(nums)
+        if j == 1:
+            return 0 if nums[0] == target else -1
+        while (j > 1):
+            j /= 2
+            if (nums[i] > target):
+                r_prev = i
+                i -= (i - l_prev) // 2
+            elif (nums[i] < target):
+                l_prev = i
+                i += (r_prev - i) // 2
+            if(nums[i] == target):
+                return i
+        return -1
+        
