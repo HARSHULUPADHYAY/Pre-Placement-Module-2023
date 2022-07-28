@@ -1,0 +1,19 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        longest_substring = 0
+        
+        substring_map = {}
+        start = 0
+        end = 0
+        
+        while end < len(s):
+            letter = s[end]
+            if letter in substring_map:
+                longest_substring = max(longest_substring, end - start)
+                start = max(substring_map.get(letter) + 1, start)
+            substring_map[letter] = end
+            end += 1
+        
+        longest_substring = max(longest_substring, end - start)
+        return longest_substring
+        
