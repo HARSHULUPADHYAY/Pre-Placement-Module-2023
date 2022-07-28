@@ -1,0 +1,27 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        visit = [[0]*n for _ in range(m)]
+        res = 0
+        
+        def dfs(i, j, grid, visit):
+			# out of bounds 
+            if not (i in list(range(m)) and j in list(range(n))):
+                return 0
+			# water or visited already
+            if grid[i][j]==0 or visit[i][j]==1:
+                return 0
+            
+            visit[i][j]=1
+			# expansion to 4 directions
+            return dfs(i-1,j,grid,visit)+dfs(i+1,j,grid,visit)+dfs(i,j-1,grid,visit)+dfs(i,j+1,grid,visit)+1
+        
+        
+        for i in range(m):
+            for j in range(n):
+				# unvisited land
+                if grid[i][j] and visit[i][j]==0:
+                    res = max(res, dfs(i,j,grid,visit))
+                    
+        return res
+        
