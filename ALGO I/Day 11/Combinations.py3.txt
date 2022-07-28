@@ -1,0 +1,28 @@
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        
+        #So n is a range
+        #i.e. go from 1 to n
+        #combos being a length of k
+        
+        final = []
+        
+        self.helper(1, n+1, k, [], final)
+        
+        return final
+        
+    def helper(self, start, n, k, cur, final):
+        
+        if(len(cur) == k):
+            final.append(cur[:])
+            return
+        
+        for i in range(start, n):
+            cur.append(i)
+            self.helper(i + 1, n, k, cur, final)
+            cur.pop() # remove latest so we can pursue other combinations
