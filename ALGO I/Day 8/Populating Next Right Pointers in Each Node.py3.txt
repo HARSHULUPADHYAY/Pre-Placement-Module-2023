@@ -1,0 +1,20 @@
+class Solution(object):
+    def connect(self, root):
+        """
+        :type root: Node
+        :rtype: Node
+        """
+        if(not root):
+            return root
+        l = [root]
+        while(l):
+            
+            n = []
+            for i in range(1,len(l)):
+                l[i-1].next = l[i]
+            for node in l:
+                if(node.left):
+                    n.append(node.left)
+                    n.append(node.right)
+            l = n 
+        return root
