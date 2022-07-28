@@ -1,0 +1,23 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        n=len(s1)
+        sd1={}
+        sd2={}
+        for i in s1:
+            sd1[i]=1+sd1.get(i,0)
+        l=0
+        for i in range(len(s2)+1):
+            if i>=n:
+                if sd2==sd1:
+                    return True
+                sd2[s2[l]]-=1
+                if sd2[s2[l]]==0:
+                    sd2.pop(s2[l])
+                l+=1
+            if i<len(s2):
+                if s2[i] not in sd2:
+                    sd2[s2[i]]=1
+                else:
+                    sd2[s2[i]]+=1
+        return False
+        
