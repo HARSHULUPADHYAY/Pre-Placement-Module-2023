@@ -1,0 +1,22 @@
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        ans = 0
+        def DFS(root, sm):
+            nonlocal ans
+            if ans == 1:
+                return True
+            if not root:
+                return False
+            sm += root.val
+           
+                
+            if root.left:
+                DFS(root.left, sm)
+            if root.right:
+                DFS(root.right, sm)
+            if not root.left and not root.right:
+                #print(sm == targetSum)
+                ans = (sm == targetSum)
+            return ans
+        ans = DFS(root,0)
+        return ans
