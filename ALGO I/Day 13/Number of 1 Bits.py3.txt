@@ -1,0 +1,6 @@
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        res, s = 0,  f"{n:b}"
+        for c in s:
+            if c == '1': res = res + 1
+        return res
