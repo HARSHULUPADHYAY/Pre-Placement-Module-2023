@@ -1,0 +1,13 @@
+class Solution:
+    def lowestCommonAncestor(self, root, p, q):
+        minNode, maxNode = p, q
+        if p.val>q.val:
+            minNode, maxNode = q, p
+        while root!=None:
+            if minNode.val<root.val<maxNode.val or minNode.val==root.val or maxNode.val==root.val:
+                return root
+            elif maxNode.val<root.val:
+                root = root.left
+            elif root.val<minNode.val:
+                root = root.right
+        
