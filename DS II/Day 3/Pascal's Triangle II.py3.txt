@@ -1,0 +1,18 @@
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        d = {}
+        return self.compute_row(rowIndex, d)
+        
+    def compute_row(self, n, d):
+        if n == 0: return [1]
+        if n == 1: return [1, 1]
+        if n in d:
+            return d[n]
+        else:
+            pre = self.compute_row(n-1, d)
+            row = [1]
+            for i in range(n-1):
+                row.append(pre[i] + pre[i+1])
+            row.append(1)
+            d[n] = row
+            return row
