@@ -1,0 +1,22 @@
+class Solution:
+    def intervalIntersection(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
+        l = []
+        
+        i = 0
+        j = 0
+        
+        while i < len(A) and j < len(B):
+            s1, e1 = A[i]
+            s2, e2 = B[j]
+            if e1 < e2:
+                mx = max(s1, s2)
+                if mx <= e1:
+                    l.append([mx,e1])
+                i += 1
+            else:
+                mx = max(s1, s2)
+                if mx <= e2:
+                    l.append([mx,e2])
+                j += 1
+        
+        return l
