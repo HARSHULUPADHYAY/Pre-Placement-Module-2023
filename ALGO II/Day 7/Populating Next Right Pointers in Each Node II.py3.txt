@@ -1,0 +1,21 @@
+class Solution:
+    def connect(self, root):
+        if not root:
+            return root
+
+        dummy = Node(0)
+        curr = root
+        while curr:
+            dummy.next = None
+            tmp = dummy
+            while curr:
+                if curr.left:
+                    tmp.next = curr.left
+                    tmp = tmp.next
+                if curr.right:
+                    tmp.next = curr.right
+                    tmp = tmp.next
+                curr = curr.next
+            curr = dummy.next
+
+        return root
